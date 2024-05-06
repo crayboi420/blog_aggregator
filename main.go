@@ -23,7 +23,9 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /v1/readiness", handlerReadiness)
 	mux.HandleFunc("GET /v1/err", handlerErr)
+
 	mux.HandleFunc("POST /v1/users", cfg.handlerCreateUser)
+	mux.HandleFunc("GET /v1/users", cfg.handlerGetUserApi)
 
 	cors := middlewareCORS(mux)
 	serv := &http.Server{
