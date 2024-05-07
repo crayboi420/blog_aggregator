@@ -12,6 +12,7 @@ import (
 )
 
 func main() {
+
 	godotenv.Load()
 	port := os.Getenv("PORT")
 	dbURL := os.Getenv("CONN")

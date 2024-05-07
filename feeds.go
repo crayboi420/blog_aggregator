@@ -39,7 +39,7 @@ func (cfg *apiConfig) handlerFeedsPost(w http.ResponseWriter, r *http.Request, u
 	}
 
 	type ret struct {
-		Feed       database.Feed       `json:"feed"`
+		Feed       Feed       `json:"feed"`
 		FeedFollow database.FeedFollow `json:"feed_follow"`
 	}
 
@@ -57,14 +57,19 @@ func (cfg *apiConfig) handlerFeedsPost(w http.ResponseWriter, r *http.Request, u
 		return
 	}
 
-	respondWithJSON(w, http.StatusOK, ret{Feed: resp1, FeedFollow: resp2})
+	respondWithJSON(w, http.StatusOK, ret{Feed: databaseFeedtoFeed(resp1), FeedFollow: resp2})
 }
 
 func (cfg *apiConfig) handlerFeedsGet(w http.ResponseWriter, r *http.Request) {
-	feeds, err := cfg.DB.GetFeeds(r.Context())
+	dbfeeds, err := cfg.DB.GetFeeds(r.Context())
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Couldn't find feeds: "+err.Error())
 		return
 	}
-	respondWithJSON(w, http.StatusOK, feeds)
+	feeds:= make([]Feed,0)
+
+	for _,dbfeed := range dbfeeds{
+		feeds = append(feeds, databaseFeedtoFeed(dbfeed))
+	}
+	respondWithJSON(w, http.StatusOK,feeds)
 }
