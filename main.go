@@ -25,7 +25,14 @@ func main() {
 	mux.HandleFunc("GET /v1/err", handlerErr)
 
 	mux.HandleFunc("POST /v1/users", cfg.handlerCreateUser)
-	mux.HandleFunc("GET /v1/users", cfg.handlerGetUserApi)
+	mux.HandleFunc("GET /v1/users", cfg.middlewareAuth(cfg.handlerUsersGet))
+
+	mux.HandleFunc("POST /v1/feeds", cfg.middlewareAuth(cfg.handlerFeedsPost))
+	mux.HandleFunc("GET /v1/feeds", cfg.handlerFeedsGet)
+
+	mux.HandleFunc("POST /v1/feed_follows", cfg.middlewareAuth(cfg.handlerFeedFollowsPost))
+	mux.HandleFunc("DELETE /v1/feed_follows/{feedFollowID}", cfg.handlerFeedFollowsDelete)
+	mux.HandleFunc("GET /v1/feed_follows", cfg.middlewareAuth(cfg.handlerFeedFollowsGet))
 
 	cors := middlewareCORS(mux)
 	serv := &http.Server{
