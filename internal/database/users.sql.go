@@ -22,7 +22,9 @@ values
         $3,
         $4,
         encode(sha256(random() :: text :: bytea), 'hex')
-    ) RETURNING id, created_at, updated_at, name, apikey
+    )
+    on conflict (name) do update set updated_at = $3
+    RETURNING id, created_at, updated_at, name, apikey
 `
 
 type CreateUserParams struct {

@@ -21,7 +21,6 @@ type Feed struct {
 	UserID        uuid.UUID  `json:"user_id"`
 	LastFetchedAt *time.Time `json:"last_fetched_at"`
 }
-
 func databaseFeedtoFeed(feed database.Feed) Feed {
 	return Feed{
 		ID:            feed.ID,
@@ -34,8 +33,32 @@ func databaseFeedtoFeed(feed database.Feed) Feed {
 	}
 }
 
+type Post struct{
+	ID          uuid.UUID
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	Title       string
+	Url         string
+	Description string
+	PublishedAt time.Time
+	FeedID      uuid.UUID
+}
+func databasePosttoPost(dbPost database.Post) Post{
+	return Post{
+		ID:	dbPost.ID,
+		CreatedAt: dbPost.CreatedAt,
+		UpdatedAt: dbPost.UpdatedAt,
+		Title: dbPost.Title.String,
+		Url: dbPost.Url,
+		Description: dbPost.Description.String,
+		PublishedAt: dbPost.PublishedAt.Time,
+		FeedID: dbPost.FeedID,
+	}
+}
+
 
 type RSSFeed struct {
+	FeedID  uuid.UUID
 	XMLName xml.Name `xml:"rss"`
 	Version string   `xml:"version,attr"`
 	Atom    string   `xml:"atom,attr"`

@@ -1,9 +1,8 @@
 -- +goose Up
-alter table
-    feeds
-add
-    last_fetched_at timestamp;
+ALTER TABLE feeds
+    ADD last_fetched_at timestamp;
 
 -- +goose Down
-alter table
-    feeds drop last_fetched_at;
+ALTER TABLE feeds
+    DROP last_fetched_at;
+

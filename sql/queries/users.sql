@@ -1,19 +1,17 @@
 -- name: CreateUser :one
-INSERT INTO
-    users (id, created_at, updated_at, name, apikey)
-values
-    (
-        $1,
-        $2,
-        $3,
-        $4,
-        encode(sha256(random() :: text :: bytea), 'hex')
-    ) RETURNING *;
+INSERT INTO users(id, created_at, updated_at, name, apikey)
+    VALUES ($1, $2, $3, $4, encode(sha256(random()::text::bytea), 'hex'))
+ON CONFLICT (name)
+    DO UPDATE SET
+        updated_at = $3
+    RETURNING
+        *;
 
 -- name: GetUserApi :one
-Select
+SELECT
     *
-from
+FROM
     users
-where
+WHERE
     apikey = $1;
+

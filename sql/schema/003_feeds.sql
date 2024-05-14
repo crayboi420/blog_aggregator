@@ -1,13 +1,13 @@
 -- +goose Up
-create table feeds(
-    id uuid primary key,
-    created_at timestamp not null,
-    updated_at timestamp not null,
-    name varchar(64) not null,
-    url varchar(64) not null unique,
-    user_id uuid not null
-    references users(id) on delete cascade
+CREATE TABLE feeds(
+    id uuid PRIMARY KEY,
+    created_at timestamp NOT NULL,
+    updated_at timestamp NOT NULL,
+    name varchar(64) NOT NULL,
+    url varchar(64) NOT NULL UNIQUE,
+    user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- +goose Down
-drop table feeds;
+DROP TABLE feeds;
+

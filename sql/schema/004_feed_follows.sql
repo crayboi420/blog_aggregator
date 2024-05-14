@@ -1,12 +1,13 @@
 -- +goose Up
-create table feed_follows(
-    id uuid primary key,
-    created_at timestamp not null,
-    updated_at timestamp not null,
-    user_id uuid not null references users(id) on delete cascade,
-    feed_id uuid not null references feeds(id) on delete cascade,
-    unique(user_id, feed_id)
+CREATE TABLE feed_follows(
+    id uuid PRIMARY KEY,
+    created_at timestamp NOT NULL,
+    updated_at timestamp NOT NULL,
+    user_id uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    feed_id uuid NOT NULL REFERENCES feeds(id) ON DELETE CASCADE,
+    UNIQUE (user_id, feed_id)
 );
 
 -- +goose Down
-drop table feed_follows;
+DROP TABLE feed_follows;
+

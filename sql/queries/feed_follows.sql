@@ -1,20 +1,18 @@
 -- name: CreateFollow :one
-insert into
-    feed_follows(id, created_at, updated_at, user_id, feed_id)
-values
-    ($1, $2, $3, $4, $5) returning *;
+INSERT INTO feed_follows(id, created_at, updated_at, user_id, feed_id)
+    VALUES ($1, $2, $3, $4, $5)
+RETURNING
+    *;
 
 -- name: DeleteFollow :exec
-delete
-from
-    feed_follows
-where
-    id = $1;
+DELETE FROM feed_follows
+WHERE id = $1;
 
 -- name: GetFollows :many
-select
+SELECT
     *
-from
+FROM
     feed_follows
-where
+WHERE
     user_id = $1;
+

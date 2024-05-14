@@ -2,11 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"net/http"
-	"time"
-
 	"github.com/crayboi420/blog_aggregator/internal/database"
 	"github.com/google/uuid"
+	"net/http"
+	"time"
 )
 
 func (cfg *apiConfig) handlerFeedsPost(w http.ResponseWriter, r *http.Request, user database.User) {
@@ -39,7 +38,7 @@ func (cfg *apiConfig) handlerFeedsPost(w http.ResponseWriter, r *http.Request, u
 	}
 
 	type ret struct {
-		Feed       Feed       `json:"feed"`
+		Feed       Feed                `json:"feed"`
 		FeedFollow database.FeedFollow `json:"feed_follow"`
 	}
 
@@ -66,10 +65,10 @@ func (cfg *apiConfig) handlerFeedsGet(w http.ResponseWriter, r *http.Request) {
 		respondWithError(w, http.StatusInternalServerError, "Couldn't find feeds: "+err.Error())
 		return
 	}
-	feeds:= make([]Feed,0)
+	feeds := make([]Feed, 0)
 
-	for _,dbfeed := range dbfeeds{
+	for _, dbfeed := range dbfeeds {
 		feeds = append(feeds, databaseFeedtoFeed(dbfeed))
 	}
-	respondWithJSON(w, http.StatusOK,feeds)
+	respondWithJSON(w, http.StatusOK, feeds)
 }

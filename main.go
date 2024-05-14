@@ -2,13 +2,17 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
+	"time"
+
+	_ "github.com/lib/pq"
+	"os"
+
 	"github.com/crayboi420/blog_aggregator/internal/database"
 	"github.com/joho/godotenv"
-	_ "github.com/lib/pq"
+
+	"fmt"
 	"log"
 	"net/http"
-	"os"
 )
 
 func main() {
@@ -20,6 +24,8 @@ func main() {
 	db, _ := sql.Open("postgres", dbURL)
 	dbQueries := database.New(db)
 	cfg := apiConfig{DB: dbQueries}
+
+	go cfg.continousFetching(3, 10*time.Second)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /v1/readiness", handlerReadiness)
@@ -34,6 +40,8 @@ func main() {
 	mux.HandleFunc("POST /v1/feed_follows", cfg.middlewareAuth(cfg.handlerFeedFollowsPost))
 	mux.HandleFunc("DELETE /v1/feed_follows/{feedFollowID}", cfg.handlerFeedFollowsDelete)
 	mux.HandleFunc("GET /v1/feed_follows", cfg.middlewareAuth(cfg.handlerFeedFollowsGet))
+
+	mux.HandleFunc("GET /v1/posts", cfg.middlewareAuth(cfg.handlerPostsGet))
 
 	cors := middlewareCORS(mux)
 	serv := &http.Server{
