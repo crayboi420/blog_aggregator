@@ -17,3 +17,7 @@ After that, the code can be run by building:
 ```
 go build . && ./blog_aggregator
 ```
+
+## Contributing
+
+You can help by raising any issues that you find in the program
