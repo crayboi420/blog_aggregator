@@ -4,7 +4,7 @@ Blog aggregator from [bootdev](https://www.boot.dev/learn/build-blog-aggregator)
 
 ## Introduction
 
-This is a go project using postgres databases. The idea is to have users with feeds stored in the database. The feeds themselves are scraped in intervals and all posts from that feed are stored. The posts can then be viewed per user.
+This is a go project using postgres databases. The idea is to have users with RSS feeds stored in the database. The feeds themselves are scraped in intervals and all posts from that feed are stored. The posts can then be viewed per user.
 
 ## Usage
 
