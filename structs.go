@@ -3,7 +3,7 @@ package main
 import (
 	// "database/sql"
 	"encoding/xml"
-	"github.com/crayboi420/blog_aggregator/internal/database"
+	"github.com/kanavj/blog_aggregator/internal/database"
 	"github.com/google/uuid"
 	"time"
 )

@@ -7,7 +7,7 @@ import (
 	_ "github.com/lib/pq"
 	"os"
 
-	"github.com/crayboi420/blog_aggregator/internal/database"
+	"github.com/kanavj/blog_aggregator/internal/database"
 	"github.com/joho/godotenv"
 
 	"fmt"

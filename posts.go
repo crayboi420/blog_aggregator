@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/crayboi420/blog_aggregator/internal/database"
+	"github.com/kanavj/blog_aggregator/internal/database"
 	"net/http"
 	"strconv"
 )

@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/crayboi420/blog_aggregator/internal/database"
 	"github.com/google/uuid"
+	"github.com/kanavj/blog_aggregator/internal/database"
 )
 
 func fetchData(Url string) RSSFeed {

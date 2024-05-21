@@ -1,4 +1,4 @@
-module github.com/crayboi420/blog_aggregator/internal/database
+module github.com/kanavj/blog_aggregator/internal/database
 
 go 1.22.2
 

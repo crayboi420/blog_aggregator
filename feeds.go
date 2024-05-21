@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/crayboi420/blog_aggregator/internal/database"
+	"github.com/kanavj/blog_aggregator/internal/database"
 	"github.com/google/uuid"
 	"net/http"
 	"time"

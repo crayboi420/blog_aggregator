@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 	"strings"
-	"github.com/crayboi420/blog_aggregator/internal/database"
+	"github.com/kanavj/blog_aggregator/internal/database"
 )
 
 type authedHandler func(http.ResponseWriter,*http.Request, database.User)
